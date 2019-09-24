@@ -1,4 +1,6 @@
 import pandas as pd
+from sklearn.decomposition import LatentDirichletAllocation
+from sklearn.feature_extraction.text import CountVectorizer
 import logging
 from blog_post.visualization.visualization_result import PlotModel
 from blog_post.settings.settings import Settings
@@ -9,13 +11,11 @@ class GetTopic():
         self.__logger = logging.getLogger('user_topic.GetTopic')
         self.n_topics = 4
         self.num_words_topic = 25
-        self.df = pd.read_csv(Settings.cleaned_dataset_file)
+        self.df = pd.read_csv(Settings.data_without_stopword_file)
         self.df.dropna(subset=['comments'], axis=0, inplace=True)
         self.num_rows = self.df['comments'].size
 
     def execute_lda_model(self):
-        from sklearn.decomposition import LatentDirichletAllocation
-        from sklearn.feature_extraction.text import CountVectorizer
         # the vectorizer object will be used to transform text to vector form
         vectorizer = CountVectorizer(max_df=0.9, min_df=25, token_pattern='\w+|\$[\d\.]+|\S+')
         # apply transformation

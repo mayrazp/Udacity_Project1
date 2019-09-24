@@ -7,17 +7,21 @@ class Settings():
        to folder data on user's environment variables.
     """
     # Class attributes for paths
-    base_dir = os.getenv("BOSTON_AIRBNB_BASE_DATA_DIR")
+    base_dir = os.getenv("AIRBNB_BASE_DATA_DIR")
     # parser file paths
     listings_file = base_dir + '/input/Oakland/listings.csv'
     reviews_file = base_dir + '/input/Oakland/reviews.csv'
     # clean up paths
-    cleaned_dataset_file = base_dir + '/output/clean_data_boston.csv'
+    cleaned_dataset_file = base_dir + '/output/clean_data.csv'
+
+    #clean with stop_words
+    data_without_stopword_file = base_dir + '/output/data_without_stopword.csv'
 
     #topics
     user_topic_file = base_dir + '/output/user_topics.csv'
     # plots
     polarity_score_plot = base_dir +  '/output/polarity_score.jpg'
+    polarity_level_plot = base_dir +  '/output/polarity_level.jpg'
     topics_plot = base_dir +  '/output/topics.jpg'
     average_polarity_neighborhood = base_dir + '/output/average_polarity_score_neighborhood.jpg'
     count_polarity_neighborhood = base_dir + '/output/count_polarity_score_neighborhood.jpg'

@@ -10,24 +10,32 @@ class PlotModel():
     def __init__(self):
         self.__logger = logging.getLogger('PlotModel')
 
+    def review_polarity_level(self, data):
+        plt.figure(figsize=(8, 4))
+        ax = data['label_polarity'].value_counts().plot(kind='bar',color="indianred")
+        ax.set_xlabel("polarity level", fontsize=12)
+        ax.set_ylabel("count", fontsize=12)
+        plt.savefig(Settings.polarity_level_plot, transparent=True,
+                    bbox_inches='tight', pad_inches=0)
+        plt.show()
+
     def review_polarity(self, array_polarity_score):
         plt.figure(figsize=(8, 4))
-        ax = sns.barplot(array_polarity_score[0], array_polarity_score[1], color="salmon", saturation=.5, label='Boston')
+        ax = sns.barplot(array_polarity_score[0], array_polarity_score[1], color="salmon", saturation=.5, label='Oakland')
         ax.set_xlabel('Airbnb review', fontsize=14)
         ax.set_ylabel('Number of reviews', fontsize=14)
         plt.savefig(Settings.polarity_score_plot, transparent=True,
                     bbox_inches='tight', pad_inches=0)
         plt.show()
 
-
     def review_neighborhood(self, neighborhood_df):
-        ax = neighborhood_df[['mean']].plot.bar(figsize=(10, 6), legend=False, fontsize=6)
+        ax = neighborhood_df[['mean']].plot.bar(figsize=(10, 6), legend=False, fontsize=6, color = 'olivedrab')
         ax.set_xlabel("Neighbourhood", fontsize=10)
         ax.set_ylabel("Average polarity score", fontsize=10)
         plt.savefig(Settings .average_polarity_neighborhood, transparent=True,
                     bbox_inches='tight', pad_inches=0)
         plt.show()
-        ax = neighborhood_df[['count']].plot.bar(figsize=(10, 6), legend=False, fontsize=6)
+        ax = neighborhood_df[['count']].plot.bar(figsize=(10, 6), legend=False, fontsize=6, color = 'olivedrab')
         ax.set_xlabel("Neighbourhood", fontsize=10)
         ax.set_ylabel("Number of review", fontsize=10)
         plt.savefig(Settings.count_polarity_neighborhood, transparent=True,
