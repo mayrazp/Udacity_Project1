@@ -17,6 +17,7 @@ class GetTopic():
 
     def execute_lda_model(self):
         # the vectorizer object will be used to transform text to vector form
+        # min_df is used for removing terms that appear too infrequently
         vectorizer = CountVectorizer(max_df=0.9, min_df=25, token_pattern='\w+|\$[\d\.]+|\S+')
         # apply transformation
         tf = vectorizer.fit_transform(self.df['comments'])
@@ -37,6 +38,5 @@ class GetTopic():
                                                           for i in topic.argsort()[:-no_top_words - 1:-1]]
             topic_dict["Topic %d weights" % (topic_idx)] = ['{:.1f}'.format(topic[i])
                                                             for i in topic.argsort()[:-no_top_words - 1:-1]]
-        #print(pd.DataFrame(topic_dict))
         handle_plot = PlotModel()
         handle_plot.show_topic_classification(feature_names, model,ntopics)
